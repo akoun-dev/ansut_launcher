@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025, ANSUT. Licensed under the Apache License, Version 2.0. -->
+
+<!-- Widget ANSUT « Météo » (4x1), style One UI : verre foncé, grande température,
+     icône du temps, condition et ville. Un appui n'importe où actualise. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ansut_weather_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ansut_weather_widget_bg"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="18dp"
+    android:paddingEnd="18dp">
+
+    <ImageView
+        android:id="@+id/ansut_weather_icon"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:contentDescription="@string/ansut_weather_widget_label"
+        android:src="@drawable/ic_ansut_w_cloud"
+        android:tint="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/ansut_weather_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:fontFamily="sans-serif-light"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:text="–°"
+        android:textColor="#FFFFFF"
+        android:textSize="38sp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ansut_weather_condition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ansut_weather_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#B3FFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

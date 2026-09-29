@@ -1033,4 +1033,19 @@
     <string name="ansut_widget_data">Données</string>
     <string name="ansut_widget_data_subtitle">Réglages</string>
     <string name="ansut_widget_emergency">Urgence 112</string>
+
+    <!-- Widget météo ANSUT -->
+    <string name="ansut_weather_widget_label">Météo</string>
+    <string name="ansut_weather_widget_description">Météo du jour, carte verre style One UI</string>
+    <string name="ansut_weather_unavailable">Météo indisponible</string>
+    <string name="ansut_weather_cond_clear">Ciel dégagé</string>
+    <string name="ansut_weather_cond_mostly_clear">Plutôt dégagé</string>
+    <string name="ansut_weather_cond_partly">Partiellement nuageux</string>
+    <string name="ansut_weather_cond_overcast">Couvert</string>
+    <string name="ansut_weather_cond_fog">Brouillard</string>
+    <string name="ansut_weather_cond_drizzle">Bruine</string>
+    <string name="ansut_weather_cond_rain">Pluie</string>
+    <string name="ansut_weather_cond_snow">Neige</string>
+    <string name="ansut_weather_cond_showers">Averses</string>
+    <string name="ansut_weather_cond_thunder">Orage</string>
 </resources>

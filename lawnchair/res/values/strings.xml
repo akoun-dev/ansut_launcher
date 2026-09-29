@@ -1092,4 +1092,20 @@
     <string name="ansut_ussd_orange" translatable="false">#144#</string>
     <string name="ansut_ussd_mtn" translatable="false">*133#</string>
     <string name="ansut_ussd_moov" translatable="false">#123#</string>
+
+    <!-- ANSUT weather widget (Open-Meteo, One UI-style glass card) -->
+    <string name="ansut_weather_widget_label">Weather</string>
+    <string name="ansut_weather_widget_description">Current weather, in a One UI-style glass card</string>
+    <string name="ansut_weather_unavailable">Weather unavailable</string>
+    <string name="ansut_weather_city" translatable="false">Abidjan</string>
+    <string name="ansut_weather_cond_clear">Clear sky</string>
+    <string name="ansut_weather_cond_mostly_clear">Mostly clear</string>
+    <string name="ansut_weather_cond_partly">Partly cloudy</string>
+    <string name="ansut_weather_cond_overcast">Overcast</string>
+    <string name="ansut_weather_cond_fog">Fog</string>
+    <string name="ansut_weather_cond_drizzle">Drizzle</string>
+    <string name="ansut_weather_cond_rain">Rain</string>
+    <string name="ansut_weather_cond_snow">Snow</string>
+    <string name="ansut_weather_cond_showers">Showers</string>
+    <string name="ansut_weather_cond_thunder">Thunderstorm</string>
 </resources>
