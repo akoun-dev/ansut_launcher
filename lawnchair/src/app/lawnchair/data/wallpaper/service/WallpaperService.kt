@@ -19,7 +19,12 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.security.MessageDigest
 import javax.inject.Inject
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @LauncherAppSingleton
 class WallpaperService @Inject constructor(
@@ -27,6 +32,17 @@ class WallpaperService @Inject constructor(
 ) : SafeCloseable {
 
     val dao = AppDatabase.Companion.INSTANCE.get(context).wallpaperDao()
+
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
+    /** In-memory mirror of the top wallpapers so callers never block the main thread on Room. */
+    @Volatile
+    private var cachedTopWallpapers: List<Wallpaper> = emptyList()
+
+    init {
+        // Warm up the cache off the main thread; long-press popups read it synchronously.
+        scope.launch { refreshCache() }
+    }
 
     suspend fun saveWallpaper(wallpaperManager: WallpaperManager) {
         try {
@@ -41,12 +57,12 @@ class WallpaperService @Inject constructor(
         }
     }
 
-    suspend fun ensureAnsutWallpaper() {
+    suspend fun ensureAnsutWallpaper() = withContext(Dispatchers.IO) {
         val imageData = context.resources.openRawResource(R.raw.ansut_wallpaper).use(InputStream::readBytes)
         val checksum = calculateChecksum(imageData)
-        if (dao.getTopWallpapers().any { it.checksum == checksum }) return
+        if (dao.getTopWallpapers().any { it.checksum == checksum }) return@withContext
 
-        val imagePath = saveImageToAppStorage(imageData)
+        val imagePath = saveImageToAppStorage(imageData, checksum)
         dao.insert(
             Wallpaper(
                 imagePath = imagePath,
@@ -55,6 +71,7 @@ class WallpaperService @Inject constructor(
                 checksum = checksum,
             ),
         )
+        refreshCache()
     }
 
     private fun calculateChecksum(imageData: ByteArray): String {
@@ -63,7 +80,7 @@ class WallpaperService @Inject constructor(
             .joinToString("") { "%02x".format(it) }
     }
 
-    private suspend fun saveWallpaper(imageData: ByteArray) {
+    private suspend fun saveWallpaper(imageData: ByteArray) = withContext(Dispatchers.IO) {
         val timestamp = System.currentTimeMillis()
 
         val checksum = calculateChecksum(imageData)
@@ -72,9 +89,9 @@ class WallpaperService @Inject constructor(
 
         if (existingWallpapers.any { it.checksum == checksum }) {
             Log.d("WallpaperService", "Wallpaper already exists with checksum: $checksum")
-            return
+            return@withContext
         }
-        val imagePath = saveImageToAppStorage(imageData)
+        val imagePath = saveImageToAppStorage(imageData, checksum)
         if (existingWallpapers.size < 4) {
             val wallpaper = Wallpaper(
                 imagePath = imagePath,
@@ -105,6 +122,7 @@ class WallpaperService @Inject constructor(
             )
             dao.insert(wallpaper)
         }
+        refreshCache()
     }
 
     suspend fun updateWallpaperRank(selectedWallpaper: Wallpaper) {
@@ -118,11 +136,19 @@ class WallpaperService @Inject constructor(
                 dao.updateRank(wallpaper.rank)
             }
         }
+        refreshCache()
     }
 
-    fun getTopWallpapers(): List<Wallpaper> = runBlocking {
+    /**
+     * Returns the cached list of top wallpapers. The cache is refreshed asynchronously
+     * (see [refreshCache]), so this never performs blocking I/O on the caller's thread.
+     */
+    fun getTopWallpapers(): List<Wallpaper> = cachedTopWallpapers
+
+    private suspend fun refreshCache(): List<Wallpaper> {
         val wallpapers = dao.getTopWallpapers()
-        wallpapers.ifEmpty { emptyList() }
+        cachedTopWallpapers = wallpapers
+        return wallpapers
     }
 
     private fun deleteWallpaperFile(imagePath: String) {
@@ -132,14 +158,14 @@ class WallpaperService @Inject constructor(
         }
     }
 
-    private fun saveImageToAppStorage(imageData: ByteArray): String {
+    private fun saveImageToAppStorage(imageData: ByteArray, checksum: String): String {
         val storageDir = File(context.filesDir, "wallpapers")
         if (!storageDir.exists()) {
             storageDir.mkdirs()
         }
 
-        val imageHash = imageData.hashCode().toString()
-        val imageFile = File(storageDir, "wallpaper_$imageHash.jpg")
+        // Use the content checksum as the file name: stable and collision-free, unlike hashCode().
+        val imageFile = File(storageDir, "wallpaper_$checksum.jpg")
 
         if (!imageFile.exists()) {
             FileOutputStream(imageFile).use { fos ->
@@ -151,7 +177,8 @@ class WallpaperService @Inject constructor(
     }
 
     override fun close() {
-        TODO("Not yet implemented")
+        scope.cancel()
+        cachedTopWallpapers = emptyList()
     }
     companion object {
         @JvmField

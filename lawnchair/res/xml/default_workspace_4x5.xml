@@ -71,8 +71,58 @@
 
     <!-- Screen 0 -->
 
+    <!-- ANSUT Services folder (Ivorian mobile money & services).
+         Each child tries the package's launcher activity via intent first,
+         then falls back to a well-known component name. Items whose app is
+         not installed are silently dropped. -->
+    <folder
+        launcher:title="@string/ansut_services_folder_title"
+        launcher:screen="0"
+        launcher:x="0"
+        launcher:y="0">
+        <favorite
+            launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.wave.personal;end" />
+        <favorite
+            launcher:packageName="com.wave.personal"
+            launcher:className="com.wave.personal.MainActivity"/>
+        <favorite
+            launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.orange.orangemoneyafrique;end" />
+        <favorite
+            launcher:packageName="com.orange.orangemoneyafrique"
+            launcher:className="com.orange.orangemoneyafrique.MainActivity"/>
+        <favorite
+            launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=ci.moovmoney.mmpayapi;end" />
+        <favorite
+            launcher:packageName="ci.moovmoney.mmpayapi"
+            launcher:className="ci.moovmoney.mmpayapi.MainActivity"/>
+    </folder>
+
+    <!-- WhatsApp -->
+    <resolve
+        launcher:screen="0"
+        launcher:x="1"
+        launcher:y="0">
+        <favorite
+            launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.whatsapp;end" />
+        <favorite
+            launcher:packageName="com.whatsapp"
+            launcher:className="com.whatsapp.Main"/>
+    </resolve>
+
+    <!-- Facebook Lite -->
+    <resolve
+        launcher:screen="0"
+        launcher:x="2"
+        launcher:y="0">
+        <favorite
+            launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.facebook.lite;end" />
+        <favorite
+            launcher:packageName="com.facebook.lite"
+            launcher:className="com.facebook.lite.MainActivity"/>
+    </resolve>
+
     <!-- Google folder -->
-    <!-- Google, Gmail, Maps, YouTube, Drive, YouTube Music, Play Movies, Duo, Photos -->
+    <!-- Google, Maps, YouTube, Photos -->
     <folder
         launcher:title="@string/google_folder_title"
         launcher:screen="0"
@@ -82,26 +132,11 @@
             launcher:packageName="com.google.android.googlequicksearchbox"
             launcher:className="com.google.android.googlequicksearchbox.SearchActivity"/>
         <favorite
-            launcher:packageName="com.google.android.gm"
-            launcher:className="com.google.android.gm.ConversationListActivityGmail"/>
-        <favorite
             launcher:packageName="com.google.android.apps.maps"
             launcher:className="com.google.android.maps.MapsActivity"/>
         <favorite
             launcher:packageName="com.google.android.youtube"
             launcher:className="com.google.android.youtube.app.honeycomb.Shell$HomeActivity"/>
-        <favorite
-            launcher:packageName="com.google.android.apps.docs"
-            launcher:className="com.google.android.apps.docs.app.NewMainProxyActivity"/>
-        <favorite
-            launcher:packageName="com.google.android.apps.youtube.music"
-            launcher:className="com.google.android.apps.youtube.music.activities.MusicActivity"/>
-        <favorite
-            launcher:packageName="com.google.android.videos"
-            launcher:className="com.google.android.youtube.videos.EntryPoint"/>
-        <favorite
-            launcher:packageName="com.google.android.apps.tachyon"
-            launcher:className="com.google.android.apps.tachyon.MainActivity"/>
         <favorite
             launcher:packageName="com.google.android.apps.photos"
             launcher:className="com.google.android.apps.photos.home.HomeActivity"/>

@@ -56,6 +56,10 @@ import com.android.launcher3.Utilities
 import com.android.quickstep.RecentsActivity
 import com.android.systemui.shared.system.QuickStepContract
 import java.io.File
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 
 class LawnchairApp : LauncherApplication() {
     private val compatible = Build.VERSION.SDK_INT in BuildConfig.QUICKSTEP_MIN_SDK..BuildConfig.QUICKSTEP_MAX_SDK
@@ -64,6 +68,8 @@ class LawnchairApp : LauncherApplication() {
     private val isAtleastT = Utilities.ATLEAST_T
     internal var accessibilityService: LawnchairAccessibilityService? = null
     val isVibrateOnIconAnimation: Boolean by unsafeLazy { getSystemUiBoolean("config_vibrateOnIconAnimation", false) }
+
+    private val appScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     override fun onCreate() {
         super.onCreate()
@@ -77,13 +83,16 @@ class LawnchairApp : LauncherApplication() {
     private fun applyAnsutBranding() {
         val preferences = getSharedPreferences("ansut_branding", Context.MODE_PRIVATE)
         if (preferences.getBoolean("wallpaper_applied", false)) return
-        runCatching {
-            resources.openRawResource(R.raw.ansut_wallpaper).use { wallpaper ->
-                WallpaperManager.getInstance(this).setStream(wallpaper)
+        // Wallpaper decoding/writing is expensive; never block Application.onCreate().
+        appScope.launch {
+            runCatching {
+                resources.openRawResource(R.raw.ansut_wallpaper).use { wallpaper ->
+                    WallpaperManager.getInstance(this@LawnchairApp).setStream(wallpaper)
+                }
+                preferences.edit().putBoolean("wallpaper_applied", true).apply()
+            }.onFailure { error ->
+                Log.w(TAG, "Unable to apply ANSUT wallpaper", error)
             }
-            preferences.edit().putBoolean("wallpaper_applied", true).apply()
-        }.onFailure { error ->
-            Log.w(TAG, "Unable to apply ANSUT wallpaper", error)
         }
     }
 

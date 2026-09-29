@@ -18,7 +18,10 @@ sealed class WallpaperManagerCompat(val context: Context) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val colorHints: Int get() = wallpaperColors?.colorHints ?: 0
     val wallpaperManager: WallpaperManager = context.requireSystemService()
-    val service = WallpaperService(context)
+
+    // Resolve through Dagger so the @LauncherAppSingleton scope is honored
+    // (a single DAO/listener graph instead of a duplicated instance per caller).
+    val service = WallpaperService.INSTANCE.get(context)
 
     abstract val wallpaperColors: WallpaperColorsCompat?
 

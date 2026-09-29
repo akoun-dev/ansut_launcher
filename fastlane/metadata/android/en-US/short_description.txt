@@ -1,1 +1,1 @@
-Homescreen based on Launcher3 from AOSP
+The official home screen for ANSUT phones — simple, fast, localized

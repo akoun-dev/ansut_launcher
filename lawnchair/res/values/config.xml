@@ -116,7 +116,7 @@
     <string name="config_default_live_information_endpoint" translatable="false">https://lawnchair.app/live-information.json</string>
 
     <bool name="config_default_show_hotseat">true</bool>
-    <bool name="config_default_always_reload_icons">true</bool>
+    <bool name="config_default_always_reload_icons">false</bool>
     <bool name="config_default_dark_status_bar">false</bool>
     <bool name="config_default_show_notification_count">false</bool>
     <bool name="config_default_themed_hotseat_qsb">true</bool>
@@ -154,12 +154,12 @@
     <bool name="config_default_smartspace_show_date">true</bool>
     <bool name="config_default_smartspace_show_time">false</bool>
     <bool name="config_default_perform_wide_search">true</bool>
-    <bool name="config_default_live_information_enabled">true</bool>
-    <bool name="config_default_live_information_show_announcements">true</bool>
+    <bool name="config_default_live_information_enabled">false</bool>
+    <bool name="config_default_live_information_show_announcements">false</bool>
     <bool name="config_default_enable_dot_pagination">true</bool>
     <bool name="config_default_enable_material_u_popup">true</bool>
     <bool name="config_default_enable_two_line_allapps">false</bool>
-    <bool name="config_default_enable_nightly_auto_updater">true</bool>
+    <bool name="config_default_enable_nightly_auto_updater">false</bool>
     <bool name="config_default_enable_folder_icon_shape_customization">false</bool>
 
     <item name="config_default_home_icon_size_factor" type="dimen" format="float">1.0</item>
