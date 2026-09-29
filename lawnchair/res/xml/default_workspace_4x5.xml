@@ -181,6 +181,28 @@
             launcher:packageName="com.android.settings" />
     </resolve>
 
+    <!-- ANSUT: widget « Solde & Forfaits » — solde Orange/MTN/Moov en un appui.
+         packageName="@launcher" est résolu vers l'applicationId du flavor courant
+         (voir AutoInstallsLayout.PendingWidgetParser). -->
+    <appwidget
+        launcher:packageName="@launcher"
+        launcher:className="app.lawnchair.ansut.AnsutSoldeWidgetProvider"
+        launcher:screen="0"
+        launcher:spanX="4"
+        launcher:spanY="1"
+        launcher:x="0"
+        launcher:y="3"/>
+
+    <!-- ANSUT: widget « Services ANSUT » — solde, mobile money, données, urgence. -->
+    <appwidget
+        launcher:packageName="@launcher"
+        launcher:className="app.lawnchair.ansut.AnsutServicesWidgetProvider"
+        launcher:screen="1"
+        launcher:spanX="4"
+        launcher:spanY="2"
+        launcher:x="0"
+        launcher:y="0"/>
+
     <appwidget
         launcher:className="com.android.alarmclock.AnalogAppWidgetProvider"
         launcher:packageName="com.google.android.deskclock"

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025, ANSUT. Licensed under the Apache License, Version 2.0. -->
+
+<!-- Fond des widgets ANSUT : bleu de marque, coins arrondis. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/ansut_blue" />
+    <corners android:radius="20dp" />
+</shape>

@@ -110,4 +110,16 @@
         <favorite launcher:uri="market://details?id=com.android.launcher" />
     </resolve>
 
+    <!-- ANSUT: widget « Solde & Forfaits » — solde Orange/MTN/Moov en un appui.
+         packageName="@launcher" est résolu vers l'applicationId du flavor courant
+         (voir AutoInstallsLayout.PendingWidgetParser). -->
+    <appwidget
+        launcher:packageName="@launcher"
+        launcher:className="app.lawnchair.ansut.AnsutSoldeWidgetProvider"
+        launcher:screen="0"
+        launcher:spanX="3"
+        launcher:spanY="1"
+        launcher:x="0"
+        launcher:y="1"/>
+
 </favorites>

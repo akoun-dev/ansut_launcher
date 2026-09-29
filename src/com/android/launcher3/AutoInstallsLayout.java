@@ -502,9 +502,15 @@ public class AutoInstallsLayout {
 
         @Nullable
         public ComponentName getComponentName(XmlPullParser parser) {
-            final String packageName = getAttributeValue(parser, ATTR_PACKAGE_NAME);
+            String packageName = getAttributeValue(parser, ATTR_PACKAGE_NAME);
             final String className = getAttributeValue(parser, ATTR_CLASS_NAME);
             addProfileId(parser);
+            // ANSUT: the "@launcher" marker resolves to the launcher's own application id,
+            // so default-workspace widgets keep binding across product flavors
+            // (ci.ansut.launcher, ci.ansut.launcher.nightly, ci.ansut.launcher.play).
+            if ("@launcher".equals(packageName)) {
+                packageName = mContext.getPackageName();
+            }
             if (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(className)) {
                 return null;
             }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025, ANSUT. Licensed under the Apache License, Version 2.0. -->
+
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="250dp"
+    android:minHeight="40dp"
+    android:targetCellWidth="4"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="0"
+    android:description="@string/ansut_solde_widget_description"
+    android:initialLayout="@layout/ansut_solde_widget"
+    android:previewLayout="@layout/ansut_solde_widget"
+    android:resizeMode="horizontal"
+    android:widgetCategory="home_screen" />

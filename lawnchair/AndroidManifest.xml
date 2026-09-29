@@ -200,6 +200,32 @@
                 android:resource="@xml/smartspace_appwidget_info" />
         </receiver>
 
+        <!-- ANSUT : widget « Solde & Forfaits » (codes USSD en un appui). -->
+        <receiver
+            android:name="app.lawnchair.ansut.AnsutSoldeWidgetProvider"
+            android:exported="false"
+            android:label="@string/ansut_solde_widget_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ansut_solde_widget_info" />
+        </receiver>
+
+        <!-- ANSUT : widget « Services ANSUT » (solde, mobile money, urgence). -->
+        <receiver
+            android:name="app.lawnchair.ansut.AnsutServicesWidgetProvider"
+            android:exported="false"
+            android:label="@string/ansut_services_widget_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ansut_services_widget_info" />
+        </receiver>
+
         <meta-data
             android:name="xyz.paphonb.quickstepswitcher.minSdk"
             android:value="${quickstepMinSdk}" />

@@ -1071,4 +1071,25 @@
     <string name="lawnchair_action_failed">Failed to trigger action</string>
 
     <string name="please_wait">Please wait…</string>
+
+    <!-- ANSUT widgets -->
+    <string name="ansut_solde_widget_label">Balance &amp; Bundles</string>
+    <string name="ansut_solde_widget_description">Check your Orange, MTN and Moov balance with one tap</string>
+    <string name="ansut_services_widget_label">ANSUT Services</string>
+    <string name="ansut_services_widget_description">Balance, mobile money and essential services</string>
+    <string name="ansut_services_widget_title">ANSUT Services</string>
+    <string name="ansut_widget_orange" translatable="false">Orange</string>
+    <string name="ansut_widget_mtn" translatable="false">MTN</string>
+    <string name="ansut_widget_moov" translatable="false">Moov</string>
+    <string name="ansut_widget_data">Data</string>
+    <string name="ansut_widget_data_subtitle">Settings</string>
+    <string name="ansut_widget_wave" translatable="false">Wave</string>
+    <string name="ansut_widget_orange_money" translatable="false">Orange Money</string>
+    <string name="ansut_widget_moov_money" translatable="false">Moov Money</string>
+    <string name="ansut_widget_emergency">Emergency 112</string>
+    <!-- USSD codes of the Ivorian operators. If an operator changes its code,
+         update it here — the widgets read it from resources (AnsutTelecom). -->
+    <string name="ansut_ussd_orange" translatable="false">#144#</string>
+    <string name="ansut_ussd_mtn" translatable="false">*133#</string>
+    <string name="ansut_ussd_moov" translatable="false">#123#</string>
 </resources>

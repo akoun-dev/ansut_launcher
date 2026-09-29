@@ -1023,4 +1023,14 @@
     <string name="lawnchair_action_failed">Échec du déclenchement de l\'action</string>
 
     <string name="please_wait">Veuillez patienter…</string>
+
+    <!-- Widgets ANSUT -->
+    <string name="ansut_solde_widget_label">Solde &amp; Forfaits</string>
+    <string name="ansut_solde_widget_description">Solde Orange, MTN et Moov en un appui</string>
+    <string name="ansut_services_widget_label">Services ANSUT</string>
+    <string name="ansut_services_widget_description">Solde, mobile money et services essentiels</string>
+    <string name="ansut_services_widget_title">Services ANSUT</string>
+    <string name="ansut_widget_data">Données</string>
+    <string name="ansut_widget_data_subtitle">Réglages</string>
+    <string name="ansut_widget_emergency">Urgence 112</string>
 </resources>
