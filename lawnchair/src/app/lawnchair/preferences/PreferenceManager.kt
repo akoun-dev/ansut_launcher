@@ -206,7 +206,7 @@ class PreferenceManager @Inject constructor(
     val forceIconMonochrome = BoolPref("pref_forceIconMonochrome", false)
 
     override fun close() {
-        TODO("Not yet implemented")
+        sp.unregisterOnSharedPreferenceChangeListener(this)
     }
 
     private fun normalizeVibrationFeedbackLevel() {
