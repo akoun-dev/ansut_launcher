@@ -18,7 +18,7 @@
         android:text="@string/ansut_services_widget_title"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
-        android:textStyle="bold" />
+        android:fontFamily="sans-serif-medium" />
 
     <!-- Ligne 1 : solde des opérateurs + réglages données (mêmes ids que le widget 4x1). -->
     <LinearLayout
@@ -45,7 +45,7 @@
                 android:text="@string/ansut_widget_orange"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
                 android:text="@string/ansut_widget_mtn"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                 android:text="@string/ansut_widget_moov"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
                 android:text="@string/ansut_widget_data"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -162,7 +162,7 @@
             android:text="@string/ansut_widget_wave"
             android:textColor="#FFFFFF"
             android:textSize="11sp"
-            android:textStyle="bold" />
+            android:fontFamily="sans-serif-medium" />
 
         <TextView
             android:id="@+id/ansut_btn_orange_money"
@@ -179,7 +179,7 @@
             android:text="@string/ansut_widget_orange_money"
             android:textColor="#FFFFFF"
             android:textSize="11sp"
-            android:textStyle="bold" />
+            android:fontFamily="sans-serif-medium" />
 
         <TextView
             android:id="@+id/ansut_btn_moov_money"
@@ -196,7 +196,7 @@
             android:text="@string/ansut_widget_moov_money"
             android:textColor="#FFFFFF"
             android:textSize="11sp"
-            android:textStyle="bold" />
+            android:fontFamily="sans-serif-medium" />
 
         <TextView
             android:id="@+id/ansut_btn_emergency"
@@ -212,6 +212,6 @@
             android:text="@string/ansut_widget_emergency"
             android:textColor="#FFFFFF"
             android:textSize="11sp"
-            android:textStyle="bold" />
+            android:fontFamily="sans-serif-medium" />
     </LinearLayout>
 </LinearLayout>
