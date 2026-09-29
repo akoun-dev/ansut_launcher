@@ -271,4 +271,5 @@ fun About(
     }
 }
 
-private const val PRIVACY_POLICY = "https://lawnchair.app/privacy_policy"
+// ANSUT : la politique de confidentialité renvoie vers le site officiel de l'agence
+private const val PRIVACY_POLICY = "https://www.ansut.ci/"

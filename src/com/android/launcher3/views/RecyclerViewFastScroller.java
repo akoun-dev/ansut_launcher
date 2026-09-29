@@ -58,6 +58,7 @@ import com.android.launcher3.util.Themes;
 import java.util.Collections;
 import java.util.List;
 
+import app.lawnchair.ansut.AnsutTheme;
 import app.lawnchair.theme.color.tokens.ColorTokens;
 
 /**
@@ -107,7 +108,7 @@ public class RecyclerViewFastScroller extends View {
     // ANSUT One UI: the fast-scroller popup is a solid brand-accent bubble
     // (ANSUT blue), independent of the theme accent, with white text
     // (see FastScrollerPopup style in res/values/styles.xml).
-    private final static int POPUP_COLOR = 0xFF205EB3;
+    private final static int POPUP_COLOR = AnsutTheme.PRIMARY;
 
     private static final List<Rect> SYSTEM_GESTURE_EXCLUSION_RECT =
             Collections.singletonList(new Rect());

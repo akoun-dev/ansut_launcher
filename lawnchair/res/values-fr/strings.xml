@@ -1061,4 +1061,18 @@
     <string name="ansut_weather_settings_refresh">Actualiser les widgets météo</string>
     <string name="ansut_weather_settings_refresh_desc">Récupérer les dernières données maintenant</string>
     <string name="ansut_weather_settings_refreshed">Widgets météo actualisés</string>
+
+    <!-- ANSUT : onboarding premier démarrage -->
+    <string name="ansut_settings_header_subtitle">Personnalisez votre espace</string>
+    <string name="ansut_onboarding_logo_desc">Logo ANSUT</string>
+    <string name="ansut_onboarding_tagline">Votre téléphone, votre espace numérique.</string>
+    <string name="ansut_onboarding_get_started">Commencer</string>
+    <string name="ansut_onboarding_step1_title">Choisir ANSUT comme launcher</string>
+    <string name="ansut_onboarding_step1_desc">Définissez ANSUT Launcher comme application d'accueil.</string>
+    <string name="ansut_onboarding_step1_cta">Définir par défaut</string>
+    <string name="ansut_onboarding_step1_done">✓ ANSUT est votre launcher par défaut</string>
+    <string name="ansut_onboarding_step2_title">Autoriser les fonctionnalités nécessaires</string>
+    <string name="ansut_onboarding_step2_desc">Notifications et widgets s'activent depuis les réglages — rien d'obligatoire.</string>
+    <string name="ansut_onboarding_step3_title">Configurer l'écran d'accueil</string>
+    <string name="ansut_onboarding_step3_desc">Applications, widgets Solde/Météo et Services ANSUT sont déjà en place.</string>
 </resources>

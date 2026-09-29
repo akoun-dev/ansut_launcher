@@ -23,13 +23,20 @@ import android.content.Intent
 import android.content.pm.LauncherApps
 import android.os.Process
 import android.provider.Settings
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Build
 import androidx.compose.material.icons.rounded.Refresh
@@ -46,15 +53,20 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
 import app.lawnchair.LawnchairApp
 import app.lawnchair.LawnchairLauncher
+import app.lawnchair.ansut.AnsutTheme
 import app.lawnchair.preferences.getAdapter
 import app.lawnchair.preferences.observeAsState
 import app.lawnchair.preferences.preferenceManager
@@ -129,6 +141,10 @@ fun PreferencesDashboard(
             PreferencesSetDefaultLauncherWarning()
             Spacer(modifier = Modifier.height(8.dp))
         }
+
+        // ANSUT : en-tête de marque du dashboard (carte One UI dégradée bleue)
+        AnsutBrandingHeader()
+        Spacer(modifier = Modifier.height(8.dp))
 
         val deckLayout = prefs2.deckLayout.getAdapter()
         PreferenceGroup {
@@ -383,6 +399,48 @@ fun PreferencesSetDefaultLauncherWarning(
                 )
             },
         )
+    }
+}
+
+/**
+ * ANSUT : en-tête de marque de l'écran principal des réglages — carte One UI
+ * dégradée bleu ANSUT avec le monogramme blanc, le nom du launcher et un
+ * sous-titre. Distingue immédiatement ce launcher d'un Lawnchair modifié.
+ */
+@Composable
+private fun AnsutBrandingHeader(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+            .clip(RoundedCornerShape(AnsutTheme.CORNER_RADIUS_DP.dp))
+            .background(
+                Brush.verticalGradient(
+                    colors = listOf(Color(AnsutTheme.PRIMARY), Color(AnsutTheme.PRIMARY_DARK)),
+                ),
+            )
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Image(
+            painter = painterResource(id = R.mipmap.ic_launcher_home_foreground),
+            contentDescription = stringResource(id = R.string.ansut_onboarding_logo_desc),
+            modifier = Modifier.size(44.dp),
+        )
+        Spacer(modifier = Modifier.width(14.dp))
+        Column {
+            Text(
+                text = stringResource(id = R.string.derived_app_name),
+                color = Color(AnsutTheme.TEXT_PRIMARY),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Medium,
+            )
+            Text(
+                text = stringResource(id = R.string.ansut_settings_header_subtitle),
+                color = Color(AnsutTheme.TEXT_SECONDARY),
+                style = MaterialTheme.typography.bodySmall,
+            )
+        }
     }
 }
 

@@ -99,7 +99,7 @@ fun AppDrawerPreferences(
             ColorPreference(preference = prefs2.appDrawerBackgroundColor)
             SliderPreference(
                 label = stringResource(id = R.string.background_opacity),
-                adapter = prefs.drawerOpacity.getAdapter(),
+                adapter = prefs2.appDrawerOpacity.getAdapter(),
                 step = 0.1f,
                 valueRange = 0F..1F,
                 showAsPercentage = true,

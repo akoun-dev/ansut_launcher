@@ -16,7 +16,9 @@ import retrofit2.create
 private const val TAG = "LiveInformationRequest"
 
 private val retrofit = Retrofit.Builder()
-    .baseUrl("https://lawnchair.app/")
+    // ANSUT : plus aucun contenu distant depuis lawnchair.app (le flux live info
+    // est de toute façon désactivé par défaut) — requêtes neutralisées vers ansut.ci
+    .baseUrl("https://www.ansut.ci/")
     .addConverterFactory(kotlinxJson.asConverterFactory("application/json".toMediaType()))
     .build()
 

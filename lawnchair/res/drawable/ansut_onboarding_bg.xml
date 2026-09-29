@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ANSUT : fond dégradé bleu de l'onboarding (One UI). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:startColor="@color/ansut_blue"
+        android:endColor="@color/ansut_dark_blue" />
+</shape>

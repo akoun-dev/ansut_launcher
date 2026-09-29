@@ -48,6 +48,7 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.luminance
 import androidx.core.os.UserManagerCompat
+import app.lawnchair.ansut.AnsutTheme
 import app.lawnchair.preferences.PreferenceManager
 import app.lawnchair.preferences2.PreferenceManager2
 import app.lawnchair.preferences2.firstCached
@@ -151,14 +152,14 @@ fun supportsRoundedCornersOnWindows(context: Context): Boolean {
 fun overrideAllAppsTextColor(textView: TextView) {
     val context = textView.context
     val luminance = getAllAppsBaseColor(context, ColorTokens.AllAppsScrimColor.resolveColor(context)).luminance
-    val opacity = PreferenceManager.getInstance(context).drawerOpacity.get()
+    val opacity = PreferenceManager2.getInstance(context).appDrawerOpacity.firstCached()
     if (luminance > 0.5f || opacity <= 0.3f) {
         textView.setTextColor(Themes.getAttrColor(context, R.attr.allAppsAlternateTextColor))
     } else {
         // ANSUT One UI: dark glass drawer — force light labels instead of the
         // theme-dependent ?android:attr/textColorSecondary, which resolves to a
         // dark gray under a light launcher theme (dark-on-dark on the glass).
-        textView.setTextColor(0xE6FFFFFF.toInt())
+        textView.setTextColor(AnsutTheme.LABEL_ON_GLASS)
     }
 }
 
@@ -236,8 +237,8 @@ internal fun getAllAppsBaseColor(context: Context, defaultColor: Int): Int {
 
 /** Apply Lawnchair custom allapps opacity and colour to the provided colour */
 fun getAllAppsBackgroundColor(context: Context, defaultColor: Int): Int {
-    val prefs = PreferenceManager.getInstance(context)
-    val userOpacity = prefs.drawerOpacity.get()
+    // ANSUT : couleur ET opacité du drawer lues dans le même magasin (DataStore).
+    val userOpacity = PreferenceManager2.getInstance(context).appDrawerOpacity.firstCached()
     return ColorUtils.setAlphaComponent(getAllAppsBaseColor(context, defaultColor), (userOpacity * 255).roundToInt())
 }
 

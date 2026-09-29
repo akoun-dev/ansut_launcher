@@ -3,6 +3,7 @@ package app.lawnchair.theme.color.tokens
 import android.content.Context
 import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.luminance
+import app.lawnchair.ansut.AnsutTheme
 import app.lawnchair.preferences2.PreferenceManager2
 import app.lawnchair.preferences2.firstCached
 import app.lawnchair.theme.UiColorMode
@@ -29,7 +30,7 @@ object AllAppsTabColors {
             customColor
         } else {
             // ANSUT One UI: translucent white glass pill, like the drawer search bar.
-            StaticColorToken(0x33FFFFFF).resolveColor(context)
+            StaticColorToken(AnsutTheme.PILL).resolveColor(context)
         }
     }
 
@@ -69,7 +70,7 @@ object AllAppsTabColors {
         return if (effective.luminance > 0.5f) {
             ColorTokens.TextColorSecondary.resolveColor(context, scheme, uiColorMode)
         } else {
-            StaticColorToken(0xB3FFFFFF).resolveColor(context)
+            StaticColorToken(AnsutTheme.TEXT_SECONDARY).resolveColor(context)
         }
     }
 }

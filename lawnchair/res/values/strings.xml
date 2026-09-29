@@ -267,7 +267,7 @@
     <string name="prediction_mode_label">Suggestions provider</string>
     <string name="app_predictions_disable_reason_pre_q_description">This feature requires Android 10 or higher</string>
     <string name="prediction_mode_system">System</string>
-    <string name="prediction_mode_lawnchair" translatable="false">Lawnchair</string>
+    <string name="prediction_mode_lawnchair" translatable="false">ANSUT Launcher</string>
     <string name="prediction_mode_none">Off</string>
     <string name="prediction_weighted_usage_stats_label">Use device usage data</string>
     <string name="prediction_weighted_usage_stats_description">Use your device\'s usage statistics to make suggestions more accurate</string>
@@ -541,7 +541,7 @@
 
     <!-- List of available providers -->
     <string name="smartspace_mode_label">At a Glance provider</string>
-    <string name="smartspace_mode_lawnchair" translatable="false">Lawnchair</string>
+    <string name="smartspace_mode_lawnchair" translatable="false">ANSUT</string>
     <string name="smartspace_mode_google">Google</string>
     <string name="smartspace_mode_google_search">Google Search</string>
     <string name="smartspace_mode_smartspacer" translatable="false">Smartspacer</string>
@@ -782,7 +782,7 @@
     <string name="search_bar_settings">Search bar settings</string>
     <string name="hotseat_mode_label">Search bar widget</string>
     <string name="hotseat_mode_disabled">Disabled</string>
-    <string name="hotseat_mode_lawnchair" translatable="false">Lawnchair</string>
+    <string name="hotseat_mode_lawnchair" translatable="false">ANSUT Launcher</string>
     <string name="hotseat_mode_google_search">Google search bar</string>
 
     <string name="qsb_hotseat_background_transparency">Background opacity</string>
@@ -1121,4 +1121,18 @@
     <string name="ansut_weather_settings_refresh">Refresh weather widgets</string>
     <string name="ansut_weather_settings_refresh_desc">Fetch the latest data now</string>
     <string name="ansut_weather_settings_refreshed">Weather widgets updated</string>
+
+    <!-- ANSUT : onboarding premier démarrage -->
+    <string name="ansut_settings_header_subtitle">Personalize your space</string>
+    <string name="ansut_onboarding_logo_desc">Logo ANSUT</string>
+    <string name="ansut_onboarding_tagline">Your phone, your digital space.</string>
+    <string name="ansut_onboarding_get_started">Get started</string>
+    <string name="ansut_onboarding_step1_title">Choose ANSUT as your launcher</string>
+    <string name="ansut_onboarding_step1_desc">Set ANSUT Launcher as your home app.</string>
+    <string name="ansut_onboarding_step1_cta">Set as default</string>
+    <string name="ansut_onboarding_step1_done">✓ ANSUT is your default launcher</string>
+    <string name="ansut_onboarding_step2_title">Allow the required features</string>
+    <string name="ansut_onboarding_step2_desc">Notifications and widgets are enabled from settings — nothing is mandatory.</string>
+    <string name="ansut_onboarding_step3_title">Set up your home screen</string>
+    <string name="ansut_onboarding_step3_desc">Apps, Balance/Weather widgets and ANSUT Services are already in place.</string>
 </resources>

@@ -84,6 +84,13 @@
             </intent-filter>
         </activity>
 
+        <!-- ANSUT : écran de bienvenue premier démarrage -->
+        <activity
+            android:name="app.lawnchair.ansut.AnsutOnboardingActivity"
+            android:theme="@style/Theme.AnsutOnboarding"
+            android:exported="false"
+            android:excludeFromRecents="true" />
+
         <activity
             android:label="@string/lawnchair_actions"
             android:icon="@mipmap/ic_launcher_home"

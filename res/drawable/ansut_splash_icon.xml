@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ANSUT : icône du splash système Android 12+ — monogramme orange sur
+     disque bleu ANSUT (le disque se fond dans le fond bleu du splash). -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/ansut_blue" />
+    <foreground android:drawable="@drawable/ansut_splash_logo" />
+</adaptive-icon>

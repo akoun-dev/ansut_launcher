@@ -90,7 +90,8 @@
         <item name="allAppsAlternateTextColor">?android:textColorSecondary</item>
         <item name="focusHighlight">@color/system_neutral1_700</item>
         <item name="groupHighlight">@color/surface_dark</item>
-        <item name="qsbFillColor">#ff3c4043</item>
+        <!-- ANSUT One UI : QSB du dock en pastille verre translucide (thème sombre) -->
+        <item name="qsbFillColor">#33ffffff</item>
         <item name="qsbIconTintPrimary">#ff4285f4</item>
         <item name="qsbIconTintQuaternary">#ffea4335</item>
         <item name="qsbIconTintSecondary">#ff34a853</item>
@@ -114,7 +115,8 @@
         <item name="allAppsAlternateTextColor">?android:textColorSecondary</item>
         <item name="focusHighlight">@color/system_neutral1_700</item>
         <item name="groupHighlight">@color/surface_dark</item>
-        <item name="qsbFillColor">#ff202124</item>
+        <!-- ANSUT One UI : QSB du dock en pastille verre translucide (thème sombre) -->
+        <item name="qsbFillColor">#33ffffff</item>
         <item name="qsbIconTintPrimary">#ff4285f4</item>
         <item name="qsbIconTintQuaternary">#ffea4335</item>
         <item name="qsbIconTintSecondary">#ff34a853</item>

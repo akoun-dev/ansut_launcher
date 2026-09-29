@@ -52,6 +52,7 @@
         -->
         <activity
             android:name="app.lawnchair.LawnchairLauncher"
+            android:theme="@style/Theme.AnsutSplash"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
             android:stateNotNeeded="true"

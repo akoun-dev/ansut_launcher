@@ -234,6 +234,16 @@ class PreferenceManager2 @Inject constructor(
         defaultValue = ColorOption.fromString(context.getString(R.string.config_default_app_drawer_bg_color)),
     )
 
+    // ANSUT : l'opacité du drawer vit désormais dans DataStore, dans le même
+    // magasin que sa couleur (app_drawer_bg_color) — un seul réglage, une seule
+    // source de vérité (l'ancienne clé SharedPreferences "pref_drawerOpacity"
+    // n'est plus lue).
+    val appDrawerOpacity = preference(
+        key = floatPreferencesKey(name = "app_drawer_opacity"),
+        defaultValue = 0.65f,
+        onSet = { reloadHelper.recreate() },
+    )
+
     val appDrawerSearchBarBackground = preference(
         key = booleanPreferencesKey(name = "all_apps_search_bar_background"),
         defaultValue = context.resources.getBoolean(R.bool.config_default_search_bar_background),

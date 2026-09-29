@@ -3,6 +3,7 @@ package app.lawnchair.theme.color.tokens
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import app.lawnchair.ansut.AnsutTheme
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 object ColorTokens {
@@ -93,10 +94,10 @@ object ColorTokens {
 
     // ANSUT One UI: header protection matches the dark glass card (#CC0E1116) used by
     // the ANSUT widgets; applied above the drawer scrim / over blur in getHeaderColor().
-    @JvmField val AllAppsHeaderProtectionColor = StaticColorToken(0xCC0E1116)
+    @JvmField val AllAppsHeaderProtectionColor = StaticColorToken(AnsutTheme.SURFACE_GLASS)
 
     // ANSUT One UI: dark glass scrim behind the drawer sheet (was 0x404040 @ 40%).
-    @JvmField val AllAppsScrimColor = StaticColorToken(0x0E1116).setAlpha(.55f)
+    @JvmField val AllAppsScrimColor = StaticColorToken(AnsutTheme.SURFACE_GLASS_BASE).setAlpha(.55f)
 
     @JvmField val AllAppsTabBackground = DayNightColorToken(Neutral1_100, Neutral1_800.setLStar(22.0))
 
@@ -136,10 +137,10 @@ object ColorTokens {
 
     // ANSUT One UI: drawer search bar is a translucent pill on the dark glass
     // (dark variant = white glass, light theme keeps a subtle dark veil).
-    @JvmField val SearchboxHighlight = DayNightColorToken(StaticColorToken(0x22000000), StaticColorToken(0x33FFFFFF))
+    @JvmField val SearchboxHighlight = DayNightColorToken(StaticColorToken(AnsutTheme.PILL_LIGHT), StaticColorToken(AnsutTheme.PILL))
 
     // Blur variant is slightly lighter than the solid one.
-    @JvmField val SearchboxHighlightBlur = DayNightColorToken(StaticColorToken(0x14000000), StaticColorToken(0x26FFFFFF))
+    @JvmField val SearchboxHighlightBlur = DayNightColorToken(StaticColorToken(AnsutTheme.PILL_LIGHT_BLUR), StaticColorToken(AnsutTheme.GLASS_STROKE))
 
     @JvmField val DotColor = Accent3_200
 

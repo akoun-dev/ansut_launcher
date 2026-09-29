@@ -32,6 +32,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import app.lawnchair.LawnchairApp.Companion.showQuickstepWarningIfNecessary
+import app.lawnchair.ansut.AnsutOnboardingActivity
 import app.lawnchair.compat.LawnchairQuickstepCompat
 import app.lawnchair.data.AppDatabase
 import app.lawnchair.data.wallpaper.service.WallpaperService
@@ -158,6 +159,11 @@ class LawnchairLauncher : QuickstepLauncher() {
     val gestureController by unsafeLazy { GestureController(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // ANSUT : quitte le thème splash (manifest) AVANT la création du décor
+        // pour que la fenêtre retrouve son fond transparent (wallpaper). Le
+        // splash lui-même — starting window avant Android 12, splash système
+        // sur Android 12+ — a déjà été affiché par le thème du manifest.
+        setTheme(R.style.AppTheme)
         layoutInflater.factory2 = LawnchairLayoutFactory(this)
         super.onCreate(savedInstanceState)
 
@@ -246,6 +252,11 @@ class LawnchairLauncher : QuickstepLauncher() {
         colorScheme = themeProvider.colorScheme
 
         showQuickstepWarningIfNecessary()
+
+        // ANSUT : écran de bienvenue au premier démarrage (une seule fois)
+        if (!AnsutOnboardingActivity.isDone(this)) {
+            startActivity(Intent(this, AnsutOnboardingActivity::class.java))
+        }
 
         reloadIconsIfNeeded()
 

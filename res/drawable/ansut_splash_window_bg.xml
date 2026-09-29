@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ANSUT : fond de fenêtre « splash » avant Android 12 — la starting window
+     système affiche ce drawable (bleu ANSUT + monogramme orange) pendant le
+     démarrage à froid du launcher. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/ansut_blue" />
+    <item
+        android:width="200dp"
+        android:height="200dp"
+        android:gravity="center"
+        android:drawable="@drawable/ansut_splash_logo" />
+</layer-list>

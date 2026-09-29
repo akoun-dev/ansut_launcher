@@ -177,7 +177,7 @@ class NightlyBuildsRepository(
         return try {
             val cacheDir = applicationContext.cacheDir
             val apkDirPath = cacheDir.toPath().resolve("updates").createDirectories()
-            val apkFilePath = apkDirPath.resolve("Lawnchair-update.apk").apply { deleteIfExists() }
+            val apkFilePath = apkDirPath.resolve("ANSUT-update.apk").apply { deleteIfExists() }
 
             val responseBody = api.downloadFile(url)
             val totalBytes = responseBody.contentLength().toFloat()
