@@ -239,6 +239,19 @@
                 android:resource="@xml/ansut_weather_widget_info" />
         </receiver>
 
+        <!-- ANSUT : widget « Météo détaillée » 4x2 (max/min du jour + prévisions 3 jours). -->
+        <receiver
+            android:name="app.lawnchair.ansut.weather.AnsutWeatherWidgetProvider4x2"
+            android:exported="false"
+            android:label="@string/ansut_weather_widget_4x2_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ansut_weather_widget_4x2_info" />
+        </receiver>
+
         <meta-data
             android:name="xyz.paphonb.quickstepswitcher.minSdk"
             android:value="${quickstepMinSdk}" />

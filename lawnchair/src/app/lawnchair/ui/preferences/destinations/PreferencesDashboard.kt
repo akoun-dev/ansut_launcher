@@ -85,6 +85,7 @@ import app.lawnchair.ui.preferences.navigation.PreferenceRootRoute
 import app.lawnchair.ui.preferences.navigation.Quickstep
 import app.lawnchair.ui.preferences.navigation.Search
 import app.lawnchair.ui.preferences.navigation.Smartspace
+import app.lawnchair.ui.preferences.navigation.Weather
 import app.lawnchair.ui.util.addIf
 import app.lawnchair.util.isDefaultLauncher
 import app.lawnchair.util.restartLauncher
@@ -154,6 +155,15 @@ fun PreferencesDashboard(
                 iconResource = if (isSmartspaceEnabled) R.drawable.ic_smartspace else R.drawable.ic_smartspace_off,
                 onNavigate = { onNavigate(Smartspace) },
                 isSelected = currentRoute is Smartspace,
+            )
+
+            // ANSUT : réglages météo (ville + actualisation des widgets)
+            PreferenceCategory(
+                label = stringResource(id = R.string.ansut_weather_settings_label),
+                description = stringResource(id = R.string.ansut_weather_settings_description),
+                iconResource = R.drawable.ic_ansut_w_cloud,
+                onNavigate = { onNavigate(Weather) },
+                isSelected = currentRoute is Weather,
             )
 
             PreferenceCategory(

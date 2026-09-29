@@ -91,9 +91,12 @@ object ColorTokens {
 
     @JvmField val TextColorSecondary = DayNightColorToken(StaticColorToken(0xde000000), Neutral2_200)
 
-    @JvmField val AllAppsHeaderProtectionColor = DayNightColorToken(SurfaceContainerHighest, SurfaceContainerLow)
+    // ANSUT One UI: header protection matches the dark glass card (#CC0E1116) used by
+    // the ANSUT widgets; applied above the drawer scrim / over blur in getHeaderColor().
+    @JvmField val AllAppsHeaderProtectionColor = StaticColorToken(0xCC0E1116)
 
-    @JvmField val AllAppsScrimColor = StaticColorToken(0x404040).setAlpha(.40f)
+    // ANSUT One UI: dark glass scrim behind the drawer sheet (was 0x404040 @ 40%).
+    @JvmField val AllAppsScrimColor = StaticColorToken(0x0E1116).setAlpha(.55f)
 
     @JvmField val AllAppsTabBackground = DayNightColorToken(Neutral1_100, Neutral1_800.setLStar(22.0))
 
@@ -131,9 +134,12 @@ object ColorTokens {
             if (translucent) setAlpha(translucentIntensity) else this
         }
 
-    @JvmField val SearchboxHighlight = DayNightColorToken(Neutral2_600.setLStar(98.0), Neutral1_800)
+    // ANSUT One UI: drawer search bar is a translucent pill on the dark glass
+    // (dark variant = white glass, light theme keeps a subtle dark veil).
+    @JvmField val SearchboxHighlight = DayNightColorToken(StaticColorToken(0x22000000), StaticColorToken(0x33FFFFFF))
 
-    @JvmField val SearchboxHighlightBlur = SearchboxHighlight.setAlpha(.54f)
+    // Blur variant is slightly lighter than the solid one.
+    @JvmField val SearchboxHighlightBlur = DayNightColorToken(StaticColorToken(0x14000000), StaticColorToken(0x26FFFFFF))
 
     @JvmField val DotColor = Accent3_200
 

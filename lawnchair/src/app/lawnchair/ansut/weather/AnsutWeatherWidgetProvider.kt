@@ -35,7 +35,9 @@ import kotlinx.coroutines.launch
  * Widget « Météo » (4×1), style One UI : fond verre arrondi, grande température,
  * icône du temps et ville. Données Open-Meteo, cache hors-ligne.
  *
- * Un appui n'importe où sur le widget déclenche une actualisation manuelle.
+ * Un appui n'importe où sur le widget déclenche une actualisation manuelle ;
+ * après chaque mise à jour, les widgets 4×1 ET 4×2 sont re-rendus
+ * (voir [AnsutWeatherSync.renderAll]).
  */
 class AnsutWeatherWidgetProvider : AppWidgetProvider() {
 
@@ -45,16 +47,16 @@ class AnsutWeatherWidgetProvider : AppWidgetProvider() {
         appWidgetIds: IntArray,
     ) {
         render(context, appWidgetManager, appWidgetIds)
-        refreshAsync(context)
+        refreshAsync(context, force = false)
     }
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
-        if (intent.action == ACTION_REFRESH) {
+        if (intent.action == AnsutWeatherSync.ACTION_REFRESH) {
             val manager = AppWidgetManager.getInstance(context)
             val ids = manager.getAppWidgetIds(ComponentName(context, AnsutWeatherWidgetProvider::class.java))
             render(context, manager, ids)
-            refreshAsync(context)
+            refreshAsync(context, force = true)
         }
     }
 
@@ -62,14 +64,12 @@ class AnsutWeatherWidgetProvider : AppWidgetProvider() {
      * Rendu immédiat depuis le cache (offline-first), puis enrichissement réseau.
      * [goAsync] garde le processus actif le temps de la requête (≈ 10 s max).
      */
-    private fun refreshAsync(context: Context) {
+    private fun refreshAsync(context: Context, force: Boolean) {
         val pendingResult = goAsync()
         refreshScope.launch {
             try {
-                AnsutWeatherRepository.refresh(context)
-                val manager = AppWidgetManager.getInstance(context)
-                val ids = manager.getAppWidgetIds(ComponentName(context, AnsutWeatherWidgetProvider::class.java))
-                render(context, manager, ids)
+                AnsutWeatherRepository.refresh(context, force)
+                AnsutWeatherSync.renderAll(context)
             } catch (t: Throwable) {
                 Log.w(TAG, "Weather refresh failed", t)
             } finally {
@@ -78,42 +78,42 @@ class AnsutWeatherWidgetProvider : AppWidgetProvider() {
         }
     }
 
-    private fun render(
-        context: Context,
-        appWidgetManager: AppWidgetManager,
-        appWidgetIds: IntArray,
-    ) {
-        val views = RemoteViews(context.packageName, R.layout.ansut_weather_widget)
-        val data = AnsutWeatherRepository.getCached(context)
-        if (data == null) {
-            views.setTextViewText(R.id.ansut_weather_temp, "–°")
-            views.setTextViewText(R.id.ansut_weather_condition, context.getString(R.string.ansut_weather_unavailable))
-            views.setImageViewResource(R.id.ansut_weather_icon, R.drawable.ic_ansut_w_cloud)
-        } else {
-            views.setTextViewText(R.id.ansut_weather_temp, formatTemperature(data.temperature))
-            views.setTextViewText(R.id.ansut_weather_condition, AnsutWeatherRepository.labelFor(context, data.condition))
-            views.setImageViewResource(R.id.ansut_weather_icon, AnsutWeatherRepository.iconFor(data.condition, data.isDay))
-        }
-        views.setTextViewText(R.id.ansut_weather_city, AnsutWeatherRepository.cityLabel(context))
-        views.setOnClickPendingIntent(R.id.ansut_weather_root, refreshPendingIntent(context))
-        appWidgetIds.forEach { appWidgetManager.updateAppWidget(it, views) }
-    }
-
-    private fun formatTemperature(temperature: Double): String =
-        String.format(Locale.getDefault(), "%.0f°", temperature)
-
-    private fun refreshPendingIntent(context: Context): PendingIntent = PendingIntent.getBroadcast(
-        context,
-        REQUEST_REFRESH,
-        Intent(context, AnsutWeatherWidgetProvider::class.java).setAction(ACTION_REFRESH),
-        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
-    )
-
     companion object {
         private const val TAG = "AnsutWeatherWidget"
-        private const val ACTION_REFRESH = "app.lawnchair.ansut.weather.ACTION_REFRESH"
         private const val REQUEST_REFRESH = 2001
 
         private val refreshScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
+        internal fun render(
+            context: Context,
+            appWidgetManager: AppWidgetManager,
+            appWidgetIds: IntArray,
+        ) {
+            if (appWidgetIds.isEmpty()) return
+            val views = RemoteViews(context.packageName, R.layout.ansut_weather_widget)
+            val data = AnsutWeatherRepository.getCached(context)
+            if (data == null) {
+                views.setTextViewText(R.id.ansut_weather_temp, "–°")
+                views.setTextViewText(R.id.ansut_weather_condition, context.getString(R.string.ansut_weather_unavailable))
+                views.setImageViewResource(R.id.ansut_weather_icon, R.drawable.ic_ansut_w_cloud)
+            } else {
+                views.setTextViewText(R.id.ansut_weather_temp, formatTemperature(data.temperature))
+                views.setTextViewText(R.id.ansut_weather_condition, AnsutWeatherRepository.labelFor(context, data.condition))
+                views.setImageViewResource(R.id.ansut_weather_icon, AnsutWeatherRepository.iconFor(data.condition, data.isDay))
+            }
+            views.setTextViewText(R.id.ansut_weather_city, AnsutWeatherRepository.cityLabel(context))
+            views.setOnClickPendingIntent(R.id.ansut_weather_root, refreshPendingIntent(context))
+            appWidgetIds.forEach { appWidgetManager.updateAppWidget(it, views) }
+        }
+
+        private fun formatTemperature(temperature: Double): String =
+            String.format(Locale.getDefault(), "%.0f°", temperature)
+
+        private fun refreshPendingIntent(context: Context): PendingIntent = PendingIntent.getBroadcast(
+            context,
+            REQUEST_REFRESH,
+            Intent(context, AnsutWeatherWidgetProvider::class.java).setAction(AnsutWeatherSync.ACTION_REFRESH),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
     }
 }

@@ -92,6 +92,12 @@ data object Smartspace : PreferenceRootRoute, PreferenceDeepLink {
     override val deepLink = "$URI/smartspace"
 }
 
+// ANSUT : réglages météo (ville + actualisation des widgets météo)
+@Serializable
+data object Weather : PreferenceRootRoute, PreferenceDeepLink {
+    override val deepLink = "$URI/weather"
+}
+
 @Serializable
 data object About : PreferenceRootRoute, PreferenceDeepLink {
     override val deepLink = "$URI/about"

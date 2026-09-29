@@ -203,13 +203,14 @@
         launcher:x="0"
         launcher:y="0"/>
 
-    <!-- ANSUT: widget « Météo » — carte verre style One UI, données Open-Meteo. -->
+    <!-- ANSUT: widget « Météo détaillée » — carte verre One UI, max/min du jour
+         et prévisions sur 3 jours (Open-Meteo). -->
     <appwidget
         launcher:packageName="@launcher"
-        launcher:className="app.lawnchair.ansut.weather.AnsutWeatherWidgetProvider"
+        launcher:className="app.lawnchair.ansut.weather.AnsutWeatherWidgetProvider4x2"
         launcher:screen="0"
         launcher:spanX="4"
-        launcher:spanY="1"
+        launcher:spanY="2"
         launcher:x="0"
         launcher:y="4"/>
 

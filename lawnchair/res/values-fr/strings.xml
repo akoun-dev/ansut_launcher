@@ -1048,4 +1048,17 @@
     <string name="ansut_weather_cond_snow">Neige</string>
     <string name="ansut_weather_cond_showers">Averses</string>
     <string name="ansut_weather_cond_thunder">Orage</string>
+    <!-- ANSUT : widget météo détaillée (4x2) -->
+    <string name="ansut_weather_widget_4x2_label">Météo – 3 jours</string>
+    <string name="ansut_weather_widget_4x2_description">Max et min du jour, prévisions sur 3 jours, carte verre style One UI</string>
+    <string name="ansut_weather_minmax_fmt">Max %1$s · Min %2$s</string>
+    <string name="ansut_weather_day_today">Aujourd\'hui</string>
+    <string name="ansut_weather_day_tomorrow">Demain</string>
+    <!-- ANSUT : page de réglages météo -->
+    <string name="ansut_weather_settings_label">Météo</string>
+    <string name="ansut_weather_settings_description">Ville et actualisation des widgets météo ANSUT</string>
+    <string name="ansut_weather_settings_city">Ville</string>
+    <string name="ansut_weather_settings_refresh">Actualiser les widgets météo</string>
+    <string name="ansut_weather_settings_refresh_desc">Récupérer les dernières données maintenant</string>
+    <string name="ansut_weather_settings_refreshed">Widgets météo actualisés</string>
 </resources>

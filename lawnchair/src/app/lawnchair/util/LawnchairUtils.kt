@@ -154,6 +154,11 @@ fun overrideAllAppsTextColor(textView: TextView) {
     val opacity = PreferenceManager.getInstance(context).drawerOpacity.get()
     if (luminance > 0.5f || opacity <= 0.3f) {
         textView.setTextColor(Themes.getAttrColor(context, R.attr.allAppsAlternateTextColor))
+    } else {
+        // ANSUT One UI: dark glass drawer — force light labels instead of the
+        // theme-dependent ?android:attr/textColorSecondary, which resolves to a
+        // dark gray under a light launcher theme (dark-on-dark on the glass).
+        textView.setTextColor(0xE6FFFFFF.toInt())
     }
 }
 
@@ -221,7 +226,7 @@ fun resolveFolderBackgroundColor(context: Context): Int {
 }
 
 /** Apply Lawnchair custom allapps colour to the provided colour */
-private fun getAllAppsBaseColor(context: Context, defaultColor: Int): Int {
+internal fun getAllAppsBaseColor(context: Context, defaultColor: Int): Int {
     val prefs2 = PreferenceManager2.getInstance(context)
     val colorOptions: ColorOption = prefs2.appDrawerBackgroundColor.firstCached()
     val color = colorOptions.colorPreferenceEntry.lightColor.invoke(context)

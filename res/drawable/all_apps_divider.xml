@@ -15,6 +15,7 @@
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle">
-    <solid android:color="@android:color/transparent" />
+    <!-- ANSUT One UI: subtle 10% white hairline between drawer sections -->
+    <solid android:color="#1AFFFFFF" />
     <size android:height="2dp" />
 </shape>

@@ -1108,4 +1108,17 @@
     <string name="ansut_weather_cond_snow">Snow</string>
     <string name="ansut_weather_cond_showers">Showers</string>
     <string name="ansut_weather_cond_thunder">Thunderstorm</string>
+    <!-- ANSUT: detailed weather widget (4x2) -->
+    <string name="ansut_weather_widget_4x2_label">Weather – 3 days</string>
+    <string name="ansut_weather_widget_4x2_description">Today\'s high and low plus a 3-day forecast, in a One UI-style glass card</string>
+    <string name="ansut_weather_minmax_fmt">Max %1$s · Min %2$s</string>
+    <string name="ansut_weather_day_today">Today</string>
+    <string name="ansut_weather_day_tomorrow">Tomorrow</string>
+    <!-- ANSUT: weather settings page -->
+    <string name="ansut_weather_settings_label">Weather</string>
+    <string name="ansut_weather_settings_description">City and refresh for the ANSUT weather widgets</string>
+    <string name="ansut_weather_settings_city">City</string>
+    <string name="ansut_weather_settings_refresh">Refresh weather widgets</string>
+    <string name="ansut_weather_settings_refresh_desc">Fetch the latest data now</string>
+    <string name="ansut_weather_settings_refreshed">Weather widgets updated</string>
 </resources>

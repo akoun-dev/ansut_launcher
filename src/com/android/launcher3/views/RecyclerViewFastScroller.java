@@ -104,6 +104,11 @@ public class RecyclerViewFastScroller extends View {
     private final static int MAX_TRACK_ALPHA = 30;
     private final static int SCROLL_BAR_VIS_DURATION = 150;
 
+    // ANSUT One UI: the fast-scroller popup is a solid brand-accent bubble
+    // (ANSUT blue), independent of the theme accent, with white text
+    // (see FastScrollerPopup style in res/values/styles.xml).
+    private final static int POPUP_COLOR = 0xFF205EB3;
+
     private static final List<Rect> SYSTEM_GESTURE_EXCLUSION_RECT =
             Collections.singletonList(new Rect());
 
@@ -209,8 +214,14 @@ public class RecyclerViewFastScroller extends View {
     /** Sets the popup view to show while the scroller is being dragged */
     public void setPopupView(TextView popupView) {
         mPopupView = popupView;
+        // ANSUT One UI: dedicated paint so the popup bubble stays brand blue while
+        // the scrollbar thumb keeps the theme accent (mThumbPaint unchanged).
+        Paint popupPaint = new Paint();
+        popupPaint.setAntiAlias(true);
+        popupPaint.setColor(POPUP_COLOR);
+        popupPaint.setStyle(Paint.Style.FILL);
         mPopupView.setBackground(
-                new FastScrollThumbDrawable(mThumbPaint, Utilities.isRtl(getResources())));
+                new FastScrollThumbDrawable(popupPaint, Utilities.isRtl(getResources())));
     }
 
     public void setRecyclerView(FastScrollRecyclerView rv) {
