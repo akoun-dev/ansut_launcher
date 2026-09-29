@@ -86,7 +86,7 @@ class PreferenceManager @Inject constructor(
     val calculatedGridSpec = when {
         // This grid configuration is perfect for Phone, tested against Pixel 7,
         // alternative dense configuration can be 5x5x7
-        isPhone -> LayoutConfig(4, 4, 6)
+        isPhone -> LayoutConfig(5, 4, 5)
 
         // This grid configuration is perfect for Tablet, tested against Pixel Tablet
         isTablet -> LayoutConfig(6, 6, 5)
@@ -94,14 +94,14 @@ class PreferenceManager @Inject constructor(
         // This grid configuration is perfect for Foldable, tested against Pixel 10 Pro Fold
         // Note: Hotseat column is 4 when folded, unfolded uses hotseatColumns + 2 or higher number
         // defined in numExtendedHotseatIcons from device profile
-        isFoldable -> LayoutConfig(4, 4, 6, 6)
+        isFoldable -> LayoutConfig(5, 4, 5, 5)
 
         // This grid configuration is not tested against actual desktop devices,
         // but tablet configuration works perfectly when displayed via emulator
         isDesktop -> LayoutConfig(6, 6, 5)
 
         // This grid configuration is the fallback for all devices type, this shouldn't be possible
-        else -> LayoutConfig(4, 4, 7)
+        else -> LayoutConfig(5, 4, 5)
     }
 
     val hotseatColumns = IntPref("pref_hotseatColumns", calculatedGridSpec.hotseatColumns, reloadGrid)
@@ -230,12 +230,24 @@ class PreferenceManager @Inject constructor(
                     hotseatColumns.set(gridState.hotseatCount)
                 }
             }
+            if (oldVersion < 3) {
+                // ANSUT One UI baseline: keep the shipped 5x4 home grid in sync
+                // with default_workspace_4x5 and the modern DataStore defaults.
+                workspaceColumns.set(4)
+                workspaceRows.set(5)
+                hotseatColumns.set(5)
+                hotseatColumnsUnfolded.set(5)
+                drawerOpacity.set(.65f)
+                sp.edit()
+                    .putBoolean("ansut_oneui_defaults_applied", true)
+                    .apply()
+            }
         }
         normalizeVibrationFeedbackLevel()
     }
 
     companion object {
-        private const val CURRENT_VERSION = 2
+        private const val CURRENT_VERSION = 3
 
         @JvmField
         val INSTANCE = DaggerSingletonObject(LauncherAppComponent::getPreferenceManager)
