@@ -85,6 +85,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 @LauncherAppSingleton
@@ -877,6 +878,27 @@ class PreferenceManager2 @Inject constructor(
         preferencesDataStore.data
             .onEach { cachedPreferences = it }
             .launchIn(scope)
+
+        // DataStore defaults only apply when a key is absent. Existing Lawnchair
+        // installations therefore need a one-time ANSUT baseline migration.
+        scope.launch(Dispatchers.IO) {
+            preferencesDataStore.edit { prefs ->
+                val versionKey = intPreferencesKey("ansut_oneui_defaults_version")
+                if ((prefs[versionKey] ?: 0) < 1) {
+                    prefs[stringPreferencesKey("app_drawer_bg_color")] = "custom|#0e1116"
+                    prefs[stringPreferencesKey("accent_color")] = "custom|#205eb3"
+                    prefs[booleanPreferencesKey("rounded_widgets")] = true
+                    prefs[booleanPreferencesKey("all_apps_search_bar_background")] = true
+                    prefs[booleanPreferencesKey("show_suggested_apps_at_drawer_top")] = false
+                    prefs[booleanPreferencesKey("app_drawer_haptic_feedback")] = true
+                    prefs[booleanPreferencesKey("show_status_bar")] = true
+                    prefs[booleanPreferencesKey("enable_smartspace")] = true
+                    prefs[booleanPreferencesKey("show_icon_labels_on_home_screen")] = true
+                    prefs[booleanPreferencesKey("show_icon_labels_in_drawer")] = true
+                    prefs[versionKey] = 1
+                }
+            }
+        }
 
         initializeIconShape(iconShape.firstCached(this))
         iconShape.get()
